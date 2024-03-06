@@ -1,20 +1,37 @@
+import React, { useState } from "react";
+
 export default function ProductCard({ product }) {
-  let currentImageIndex = 0;
-  let itemsInCart = 0;
+  const [productCount, setProductCount] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const numImages = product.imageUrls.length;
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % numImages);
+  };
+
+  const handlePreviousImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + numImages) % numImages);
+  };
 
   const handleAddToCartClick = () => {
-    itemsInCart++;
-    alert(`you added ${itemsInCart}`);
+    const newProductCount = productCount + 1;
+    setProductCount(newProductCount);
+    alert(`You have ${newProductCount} item(s) added to your cart`);
   };
+
   return (
     <>
       <div id="image-carousel">
         <img
-          src={product.imageUrls[currentImageIndex] + " " + product.name}
+          src={product.imageUrls[currentImageIndex]}
           alt={product.name}
         />
-        <button>Next</button>
-        <button>Previous</button>
+        <button onClick={handleNextImage} disabled={numImages === 1}>
+          Next
+        </button>
+        <button onClick={handlePreviousImage} disabled={numImages === 1}>
+          Previous
+        </button>
       </div>
 
       <h3>{product.name}</h3>
@@ -24,7 +41,7 @@ export default function ProductCard({ product }) {
 
       <button onClick={handleAddToCartClick}>Add to Cart</button>
 
-      {!product.isInStock && "The product is out of stock"}
+      {!product.isInStock && <p>The product is out of stock</p>}
     </>
   );
 }

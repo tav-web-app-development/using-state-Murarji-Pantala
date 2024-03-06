@@ -5,7 +5,7 @@
 
 1. Have the product image change when the next or previous button are clicked
 1. Disable the next and previous button when there are no more images left to be shown
-
+            
 ## Fix the Show Description Button
 
 1. Fix the show description button to toggle between showing product details or hiding them when clicked
