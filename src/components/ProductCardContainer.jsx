@@ -1,8 +1,9 @@
+import React from "react";
 import ProductCard from "./ProductCard";
 
 export default function ProductCardContainer({ products }) {
-  const productsJsx = products.map((product) => (
-    <ProductCard product={product} />
+  const productsJsx = products.map((product, index) => (
+    <ProductCard key={index} product={product} />
   ));
   return (
     <>
